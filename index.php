@@ -8,6 +8,7 @@
     <title>C19</title>
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <script src="js/jquery.js"></script>
 </head>
 
 <body>
