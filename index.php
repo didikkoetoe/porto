@@ -8,7 +8,8 @@ $sjson = $decode["list_data"];
 $dataTiapHalaman = 12;
 $totalData = count($sjson);
 $jmlHalaman = ceil($totalData / $dataTiapHalaman);
-$awalData = ($dataTiapHalaman);
+$halAktif = (isset($_GET["halaman"])) ? $_GET["halaman"] : 1;
+$awalData = ($dataTiapHalaman * $halAktif) - $dataTiapHalaman;
 
 ?>
 
@@ -74,17 +75,23 @@ $awalData = ($dataTiapHalaman);
                         <div class="col">
                             <nav aria-label="...">
                                 <ul class="pagination float-end mx-2">
-                                    <li class="page-item disabled">
+                                    <!-- <li class="page-item disabled">
                                         <span class="page-link">Previous</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active" aria-current="page">
-                                        <span class="page-link">2</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
+                                    </li> -->
+                                    <?php for ($i = 1; $i <= $jmlHalaman; $i++) : ?>
+                                        <?php if ($i == $halAktif) : ?>
+                                            <li class="page-item active" aria-current="page">
+                                                <a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                                            </li>
+                                        <?php else : ?>
+                                            <li class="page-item" aria-current="page">
+                                                <a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                                            </li>
+                                        <?php endif; ?>
+                                    <?php endfor; ?>
+                                    <!-- <li class="page-item">
                                         <a class="page-link" href="#">Next</a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </nav>
                         </div>
@@ -100,7 +107,9 @@ $awalData = ($dataTiapHalaman);
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $j = 1; ?>
                             <?php foreach ($sjson as $data) : ?>
+                                <?php if ($j > $dataTiapHalaman) break; ?>
                                 <tr>
                                     <th><?= $data["key"]; ?></th>
                                     <td><?= $data["jumlah_kasus"]; ?></td>
@@ -108,6 +117,7 @@ $awalData = ($dataTiapHalaman);
                                     <td><?= $data["jumlah_meninggal"]; ?></td>
                                     <td><?= $data["jumlah_sembuh"]; ?></td>
                                 </tr>
+                                <?php $j++ ?>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
