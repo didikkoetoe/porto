@@ -37,8 +37,8 @@ $awalData = ($dataTiapHalaman * $halAktif) - $dataTiapHalaman;
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Statistik</a>
-                    <a class="nav-link" href="#">Rumah Sakit Rujukan</a>
+                    <a class="nav-link" aria-current="page" href="#">Statistik</a>
+                    <a class="nav-link" href="#" id="rumkit">Rumah Sakit Rujukan</a>
                 </div>
             </div>
         </div>
@@ -61,7 +61,7 @@ $awalData = ($dataTiapHalaman * $halAktif) - $dataTiapHalaman;
             </div>
 
             <!-- Center menu -->
-            <div class="col-md-10">
+            <div class="col-md-10" id="menu">
                 <div class="border rounded">
                     <h2 class="text-center">Data Covid Tiap Provinsi di Indonesia</h2>
                     <div class="row justify-content-around">
@@ -131,7 +131,7 @@ $awalData = ($dataTiapHalaman * $halAktif) - $dataTiapHalaman;
     <!-- End of menu -->
 
     <script src="bootstrap/js/bootstrap.min.js"></script>
-
+    <script src="js/index.js"></script>
 </body>
 
 </html>
