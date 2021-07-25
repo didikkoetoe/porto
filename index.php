@@ -1,3 +1,12 @@
+<?php
+
+// Connect to API
+$sJson = file_get_contents("https://data.covid19.go.id/public/api/prov.json");
+$decode = json_decode($sJson, true);
+$sjson = $decode["list_data"];
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,35 +54,31 @@
 
         <!-- Center menu -->
         <div class="col-md-10">
-            <table class="table border rounded bg-light">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">First</th>
-                        <th scope="col">Last</th>
-                        <th scope="col">Handle</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>@fat</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="border rounded">
+                <h2 class="text-center">Data Tiap Provinsi di Indonesia</h2>
+                <table class="table border bg-light">
+                    <thead>
+                        <tr>
+                            <th scope="col">Provinsi</th>
+                            <th scope="col">Jumlah Kasus</th>
+                            <th scope="col">Jumlah Dirawat</th>
+                            <th scope="col">Jumlah Meninggal</th>
+                            <th scope="col">Jumlah Sembuh</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($sjson as $data) : ?>
+                            <tr>
+                                <th><?= $data["key"]; ?></th>
+                                <td><?= $data["jumlah_kasus"]; ?></td>
+                                <td><?= $data["jumlah_dirawat"]; ?></td>
+                                <td><?= $data["jumlah_meninggal"]; ?></td>
+                                <td><?= $data["jumlah_sembuh"]; ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
         <!-- Right menu -->
