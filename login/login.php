@@ -1,3 +1,11 @@
+<?php
+
+if (isset($_POST["masuk"])) {
+    header("Location: ../index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,9 +45,9 @@
                             <label class="form-check-label" for="flexCheckDefault">Ingat saya</label>
                         </div>
                     </div>
-                    <button class="btn btn-primary">Masuk</button>
+                    <button class="btn btn-primary" name="masuk">Masuk</button>
                     <hr>
-                    <button class="btn btn-success">Sign Up</button>
+                    <a href="signup.php" class="btn btn-success">Sign Up</a>
                 </form>
             </div>
         </div>
