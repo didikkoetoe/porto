@@ -27,6 +27,7 @@ if (isset($_POST["masuk"])) {
     <title>Login</title>
     <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="../css/login.css">
     <script src="../js/jquery.js"></script>
 </head>
 
@@ -36,32 +37,32 @@ if (isset($_POST["masuk"])) {
     <div class="container">
         <div class="row">
             <div class="col-md">
-                <h2 class="text-center">Login</h2>
-                <form action="" class="form" method="POST">
-                    <div class="mb-3">
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="fas fa-user"></i></div>
-                            <input type="text" class="form-control" placeholder="Masukan username" name="username" autocomplete="off">
+                <div class="border rounded px-3">
+                    <h2 class="text-center mt-2 mb-3">Login</h2>
+                    <form action="" class="form" method="POST">
+                        <div class="mb-3">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-user"></i></div>
+                                <input type="text" class="form-control" placeholder="Masukan username" name="username" autocomplete="off">
+                            </div>
                         </div>
-                        <i class="fas fa-exclamation-circle"></i>
-                    </div>
-                    <div class="mb-3">
-                        <div class="input-group">
-                            <div class="input-group-text"><i class="fas fa-lock"></i></div>
-                            <input name="password" type="password" class="form-control" placeholder="Masukan password">
+                        <div class="mb-2">
+                            <div class="input-group">
+                                <div class="input-group-text"><i class="fas fa-lock"></i></div>
+                                <input name="password" type="password" class="form-control" placeholder="Masukan password">
+                            </div>
                         </div>
-                        <i class="fas fa-exclamation-circle"></i>
-                    </div>
-                    <div class="mb-3">
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            <label class="form-check-label" for="flexCheckDefault">Ingat saya</label>
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">Ingat saya</label>
+                            </div>
                         </div>
-                    </div>
-                    <button class="btn btn-primary" name="masuk">Masuk</button>
-                    <hr>
-                    <a href="signup.php" class="btn btn-success">Sign Up</a>
-                </form>
+                        <button class="btn btn-primary" name="masuk">Masuk</button>
+                        <hr>
+                        <a href="signup.php" class="btn btn-success mb-3">Sign Up</a>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
