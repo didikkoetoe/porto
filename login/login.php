@@ -1,8 +1,19 @@
 <?php
 
+// Koneksi ke halaman functions.php
+require "../functions/functions.php";
+
 if (isset($_POST["masuk"])) {
-    header("Location: ../index.php");
-    exit;
+    $username = $_POST["username"];
+    $password = $_POST["password"];
+
+    $result = mysqli_query($db, "SELECT * FROM users WHERE username = '$username'");
+    if (mysqli_num_rows($result) > 0) {
+        header("Location: ../index.php");
+        exit;
+    }
+
+    $error = true;
 }
 ?>
 
@@ -32,12 +43,14 @@ if (isset($_POST["masuk"])) {
                             <div class="input-group-text"><i class="fas fa-user"></i></div>
                             <input type="text" class="form-control" placeholder="Masukan username" name="username" autocomplete="off">
                         </div>
+                        <i class="fas fa-exclamation-circle"></i>
                     </div>
                     <div class="mb-3">
                         <div class="input-group">
                             <div class="input-group-text"><i class="fas fa-lock"></i></div>
-                            <input type="password" class="form-control" placeholder="Masukan password">
+                            <input name="password" type="password" class="form-control" placeholder="Masukan password">
                         </div>
+                        <i class="fas fa-exclamation-circle"></i>
                     </div>
                     <div class="mb-3">
                         <div class="form-check">
