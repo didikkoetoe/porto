@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 // Koneksi ke halaman functions.php
 require "../functions/functions.php";
 
@@ -9,6 +9,11 @@ if (isset($_POST["masuk"])) {
 
     $result = mysqli_query($db, "SELECT * FROM users WHERE username = '$username'");
     if (mysqli_num_rows($result) > 0) {
+        // Ambil data dari db
+        $data = mysqli_fetch_assoc($result);
+
+        $_SESSION["login"] = $data["username"];
+
         header("Location: ../index.php");
         exit;
     }
@@ -54,7 +59,7 @@ if (isset($_POST["masuk"])) {
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                <input class="form-check-input" name="ingatsaya" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">Ingat saya</label>
                             </div>
                         </div>
