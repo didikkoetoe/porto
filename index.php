@@ -1,4 +1,10 @@
 <?php
+session_start();
+
+if (!isset($_SESSION["login"])) {
+    header("Location: login/login.php");
+    exit;
+}
 
 // Connect to API for Data Statistik tiap Daerah
 $sJson = file_get_contents("https://data.covid19.go.id/public/api/prov.json");
