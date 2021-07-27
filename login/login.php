@@ -3,19 +3,28 @@ session_start();
 // Koneksi ke halaman functions.php
 require "../functions/functions.php";
 
+// Jika masih ada cookie dilarang masuk ke halaman ini lagi
+if (isset($_SESSION["login"])) {
+    header("Location: ../index.php");
+    exit;
+}
+
 if (isset($_POST["masuk"])) {
     $username = $_POST["username"];
     $password = $_POST["password"];
 
     $result = mysqli_query($db, "SELECT * FROM users WHERE username = '$username'");
     if (mysqli_num_rows($result) > 0) {
-        // Ambil data dari db
         $data = mysqli_fetch_assoc($result);
+        // Cek apakah password benar
+        if (password_verify($password, $data["password"])) {
 
-        $_SESSION["login"] = $data["username"];
+            // Ambil data dari db
+            $_SESSION["login"] = $data["username"];
 
-        header("Location: ../index.php");
-        exit;
+            header("Location: ../index.php");
+            exit;
+        }
     }
 
     $error = true;
