@@ -11,6 +11,11 @@ $sJson = file_get_contents("https://data.covid19.go.id/public/api/prov.json");
 $decode = json_decode($sJson, true);
 $sjson = $decode["list_data"];
 
+// Konek ke api data covid
+$covids = file_get_contents("https://data.covid19.go.id/public/api/update.json");
+$covid = json_decode($covids, true);
+$json = $covid["update"]["penambahan"];
+
 $dataTiapHalaman = 12;
 $totalData = count($sjson);
 $jmlHalaman = ceil($totalData / $dataTiapHalaman);
@@ -49,7 +54,7 @@ $awalData = ($dataTiapHalaman * $halAktif) - $dataTiapHalaman;
             </div>
             <div class="dropdown">
                 <button class="btn btn-primary dropdown-toggle me-5" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Opsi</button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" href="login/logout.php">Logout</a></li>
                     <li><a class="dropdown-item" href="#">Another action</a></li>
                 </ul>
@@ -64,11 +69,14 @@ $awalData = ($dataTiapHalaman * $halAktif) - $dataTiapHalaman;
             <!-- Left menu -->
             <div class="col-md-2">
                 <div class="card">
-                    <img src=" ..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">Card title</h5>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                        <p class="text-center">Data Tanggal <?= $json["tanggal"]; ?></p>
+                        <ul class="list-group">
+                            <li class="list-group-item list-group-item-danger">Jumlah Positif : <?= $json["jumlah_positif"]; ?></li>
+                            <li class="list-group-item list-group-item-warning">Jumlah Dirawat : <?= $json["jumlah_dirawat"]; ?></li>
+                            <li class="list-group-item list-group-item-dark">Jumlah Meninggal : <?= $json["jumlah_meninggal"]; ?></li>
+                            <li class="list-group-item list-group-item-success">Jumlah Sembuh : <?= $json["jumlah_sembuh"]; ?></li>
+                        </ul>
                     </div>
                 </div>
             </div>

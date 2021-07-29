@@ -3,7 +3,19 @@ session_start();
 // Koneksi ke halaman functions.php
 require "../functions/functions.php";
 
-// Jika masih ada cookie dilarang masuk ke halaman ini lagi
+// Cek apakah masih ada cookie dan cookienya asli atau tidak
+if (isset($_COOKIE['id']) && isset($_COOKIE['key'])) {
+    $id = $_COOKIE['id'];
+    $key = $_COOKIE['key'];
+
+    $result = mysqli_query($db, "SELECT * FROM users WHERE id = $id");
+    $username = mysqli_fetch_assoc($result);
+    if ($key == hash('sha256' , $username["key"])) {
+        $_SESSION['login'] = $username["username"];
+    }
+}
+
+// Jika masih ada session dilarang masuk ke halaman ini lagi
 if (isset($_SESSION["login"])) {
     header("Location: ../index.php");
     exit;
@@ -20,7 +32,12 @@ if (isset($_POST["masuk"])) {
         if (password_verify($password, $data["password"])) {
 
             // Ambil data dari db
-            $_SESSION["login"] = $data["username"];
+            $_SESSION["login"] = $username;
+
+            if (isset($_POST['ingatSaya'])) {
+                setcookie("id" , $data["id"] , time() + 60);
+                setcookie("key" , hash('sha256', $data["username"]) , time() + 60);
+            }
 
             header("Location: ../index.php");
             exit;
@@ -68,7 +85,7 @@ if (isset($_POST["masuk"])) {
                         </div>
                         <div class="mb-3">
                             <div class="form-check">
-                                <input class="form-check-input" name="ingatsaya" type="checkbox" value="" id="flexCheckDefault">
+                                <input class="form-check-input" name="ingatSaya" type="checkbox" value="" id="flexCheckDefault">
                                 <label class="form-check-label" for="flexCheckDefault">Ingat saya</label>
                             </div>
                         </div>
